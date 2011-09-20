@@ -26,10 +26,14 @@ function! BufPos_ActivateBuffer(num)
 endfunction
 
 function! BufPos_Initialize()
+    let l:modifier_key = "M"
+    if has('gui_macvim')
+      let l:modifier_key = "D"
+    endif
     for i in range(1, 9) 
-        exe "map <M-" . i . "> :call BufPos_ActivateBuffer(" . i . ")<CR>"
+      exe "map <".l:modifier_key."-" . i . "> :call BufPos_ActivateBuffer(" . i . ")<CR>"
     endfor
-    exe "map <M-0> :call BufPos_ActivateBuffer(10)<CR>"
+    exe "map <".l:modifier_key."-0> :blast<CR>"
 endfunction
 
 autocmd VimEnter * call BufPos_Initialize()
