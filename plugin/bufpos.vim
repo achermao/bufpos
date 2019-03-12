@@ -14,10 +14,10 @@
 function! BufPos_ActivateBuffer(num)
     let l:count = 1
     for i in range(1, bufnr("$"))
-        if buflisted(i) && getbufvar(i, "&modifiable") 
+        if buflisted(i) && getbufvar(i, "&modifiable")
             if l:count == a:num
                 exe "buffer " . i
-                return 
+                return
             endif
             let l:count = l:count + 1
         endif
@@ -28,9 +28,10 @@ endfunction
 function! BufPos_Initialize()
     let l:modifier_key = "M"
     if has('gui_macvim')
+			set macmeta
       let l:modifier_key = "D"
     endif
-    for i in range(1, 9) 
+    for i in range(1, 9)
       exe "map <".l:modifier_key."-" . i . "> :call BufPos_ActivateBuffer(" . i . ")<CR>"
     endfor
     exe "map <".l:modifier_key."-0> :blast<CR>"
